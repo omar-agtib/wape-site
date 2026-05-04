@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, type ElementType } from "react";
 import { Link } from "react-router-dom";
 import {
   Users,
@@ -214,7 +214,7 @@ const trendingTags = [
   "#sustainability",
 ];
 
-const roleIcon: Record<Profile["role"], any> = {
+const roleIcon: Record<Profile["role"], ElementType> = {
   Engineer: Briefcase,
   Researcher: GraduationCap,
   Technician: Wrench,
@@ -560,66 +560,65 @@ const Community = () => {
                       </div>
 
                       {/* Comments */}
-                      {(p.comments.length > 0 || true) && (
-                        <div className="px-5 py-4 border-t border-border bg-secondary/30 space-y-3">
-                          {p.comments.map((c) => {
-                            const ca = profiles[c.authorId];
-                            return (
-                              <div key={c.id} className="flex gap-2.5">
-                                <Avatar profile={ca} size={32} />
-                                <div className="flex-1 bg-card rounded-xl px-3.5 py-2 border border-border">
-                                  <div className="flex items-center gap-1.5 text-xs">
-                                    <span className="font-semibold text-foreground">
-                                      {ca.name}
-                                    </span>
-                                    <span className="text-muted-foreground">
-                                      · {ca.title}
-                                    </span>
-                                  </div>
-                                  <p className="text-sm text-foreground mt-0.5">
-                                    {c.body}
-                                  </p>
-                                  <div className="flex items-center gap-3 text-[11px] text-muted-foreground mt-1">
-                                    <span>{c.time}</span>
-                                    <button className="hover:text-accent">
-                                      Like
-                                    </button>
-                                    <button className="hover:text-accent">
-                                      Reply
-                                    </button>
-                                  </div>
+                      <div className="px-5 py-4 border-t border-border bg-secondary/30 space-y-3">
+                        {p.comments.map((c) => {
+                          const ca = profiles[c.authorId];
+                          return (
+                            <div key={c.id} className="flex gap-2.5">
+                              <Avatar profile={ca} size={32} />
+                              <div className="flex-1 bg-card rounded-xl px-3.5 py-2 border border-border">
+                                <div className="flex items-center gap-1.5 text-xs">
+                                  <span className="font-semibold text-foreground">
+                                    {ca.name}
+                                  </span>
+                                  <span className="text-muted-foreground">
+                                    · {ca.title}
+                                  </span>
+                                </div>
+                                <p className="text-sm text-foreground mt-0.5">
+                                  {c.body}
+                                </p>
+                                <div className="flex items-center gap-3 text-[11px] text-muted-foreground mt-1">
+                                  <span>{c.time}</span>
+                                  <button className="hover:text-accent">
+                                    Like
+                                  </button>
+                                  <button className="hover:text-accent">
+                                    Reply
+                                  </button>
                                 </div>
                               </div>
-                            );
-                          })}
-                          <div className="flex gap-2.5 pt-1">
-                            <Avatar profile={me} size={32} />
-                            <div className="flex-1 flex gap-2">
-                              <input
-                                value={commentDraft[p.id] || ""}
-                                onChange={(e) =>
-                                  setCommentDraft((d) => ({
-                                    ...d,
-                                    [p.id]: e.target.value,
-                                  }))
-                                }
-                                onKeyDown={(e) => {
-                                  if (e.key === "Enter") addComment(p.id);
-                                }}
-                                placeholder="Add a comment…"
-                                className="flex-1 px-3.5 py-2 rounded-full border border-border bg-card text-sm focus:outline-none focus:ring-2 focus:ring-accent/30"
-                              />
-                              <button
-                                onClick={() => addComment(p.id)}
-                                className="p-2 rounded-full bg-accent-gradient text-accent-foreground shadow-orange hover:brightness-110 transition"
-                                aria-label="Send"
-                              >
-                                <Send size={14} />
-                              </button>
                             </div>
+                          );
+                        })}
+
+                        <div className="flex gap-2.5 pt-1">
+                          <Avatar profile={me} size={32} />
+                          <div className="flex-1 flex gap-2">
+                            <input
+                              value={commentDraft[p.id] || ""}
+                              onChange={(e) =>
+                                setCommentDraft((d) => ({
+                                  ...d,
+                                  [p.id]: e.target.value,
+                                }))
+                              }
+                              onKeyDown={(e) => {
+                                if (e.key === "Enter") addComment(p.id);
+                              }}
+                              placeholder="Add a comment…"
+                              className="flex-1 px-3.5 py-2 rounded-full border border-border bg-card text-sm focus:outline-none focus:ring-2 focus:ring-accent/30"
+                            />
+                            <button
+                              onClick={() => addComment(p.id)}
+                              className="p-2 rounded-full bg-accent-gradient text-accent-foreground shadow-orange hover:brightness-110 transition"
+                              aria-label="Send"
+                            >
+                              <Send size={14} />
+                            </button>
                           </div>
                         </div>
-                      )}
+                      </div>
                     </article>
                   );
                 })}

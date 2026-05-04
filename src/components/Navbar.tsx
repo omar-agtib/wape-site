@@ -97,17 +97,17 @@ const Navbar = () => {
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const location = useLocation();
 
+  const closeMenu = () => {
+    setMobileOpen(false);
+    setOpenDropdown(null);
+  };
+
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener("scroll", onScroll);
     onScroll();
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
-
-  useEffect(() => {
-    setMobileOpen(false);
-    setOpenDropdown(null);
-  }, [location.pathname]);
 
   const isHome = location.pathname === "/";
   const transparent = isHome && !scrolled;
@@ -125,7 +125,7 @@ const Navbar = () => {
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-8 flex items-center justify-between h-16 lg:h-20">
-        <Link to="/" className="flex items-center gap-2">
+        <Link to="/" onClick={closeMenu} className="flex items-center gap-2">
           <div className="w-9 h-9 rounded-lg bg-accent-gradient flex items-center justify-center">
             <span className="text-accent-foreground font-display font-bold text-sm">
               W
@@ -159,13 +159,14 @@ const Navbar = () => {
             </button>
             {openDropdown === "industries" && (
               <div className="absolute top-full left-0 pt-3 animate-fade-in">
-                <div className="bg-card border border-border rounded-xl shadow-elevated p-2 min-w-[280px]">
+                <div className="bg-card border border-border rounded-xl shadow-elevated p-2 min-w-70">
                   {industries.map((i) => {
                     const isSoon = i.status === "soon";
                     return (
                       <Link
                         key={i.to}
                         to={i.to}
+                        onClick={closeMenu}
                         className={`flex items-center gap-3 px-3 py-2.5 rounded-lg transition ${
                           isSoon
                             ? "text-muted-foreground hover:bg-secondary/60"
@@ -203,11 +204,12 @@ const Navbar = () => {
             </button>
             {openDropdown === "solutions" && (
               <div className="absolute top-full left-0 pt-3 animate-fade-in">
-                <div className="bg-card border border-border rounded-xl shadow-elevated p-2 min-w-[300px]">
+                <div className="bg-card border border-border rounded-xl shadow-elevated p-2 min-w-75">
                   {solutions.map((s) => (
                     <Link
                       key={s.to}
                       to={s.to}
+                      onClick={closeMenu}
                       className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-foreground hover:bg-secondary hover:text-accent transition"
                     >
                       <s.icon size={16} className="text-accent" />
@@ -250,6 +252,7 @@ const Navbar = () => {
             <Link
               key={l.to}
               to={l.to}
+              onClick={closeMenu}
               className="flex items-center gap-2.5 text-foreground font-medium py-2.5"
             >
               <l.icon size={16} className="text-accent" /> {l.label}
@@ -263,6 +266,7 @@ const Navbar = () => {
               <Link
                 key={i.to}
                 to={i.to}
+                onClick={closeMenu}
                 className="flex items-center gap-2.5 text-foreground/80 text-sm py-2"
               >
                 <i.icon
@@ -284,6 +288,7 @@ const Navbar = () => {
               <Link
                 key={s.to}
                 to={s.to}
+                onClick={closeMenu}
                 className="flex items-center gap-2.5 text-foreground/80 text-sm py-2"
               >
                 <s.icon size={15} className="text-accent" /> {s.label}
@@ -292,6 +297,7 @@ const Navbar = () => {
           </div>
           <Link
             to="/book-a-demo"
+            onClick={closeMenu}
             className="flex items-center justify-center gap-2 w-full text-center mt-4 px-5 py-3 rounded-lg bg-accent-gradient text-accent-foreground font-semibold shadow-orange"
           >
             <CalendarCheck size={16} /> Book a Demo
