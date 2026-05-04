@@ -41,7 +41,7 @@ export function MultiStepForm() {
   if (isComplete) {
     return (
       <div className="w-full max-w-sm">
-        <div className="relative overflow-hidden rounded-2xl border border-border/50 bg-gradient-to-br from-background via-background to-muted/20 p-12 backdrop-blur">
+        <div className="relative overflow-hidden rounded-2xl border border-border/50 bg-linear-to-br from-background via-background to-muted/20 p-12 backdrop-blur">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(120,119,198,0.1),transparent_50%)]" />
           <div className="relative flex flex-col items-center gap-4 animate-in fade-in zoom-in-95 duration-700">
             <div className="flex h-16 w-16 items-center justify-center rounded-full border-2 border-foreground/10 bg-foreground/5">
@@ -110,9 +110,9 @@ export function MultiStepForm() {
         ))}
       </div>
 
-      <div className="mb-8 overflow-hidden rounded-full bg-muted/30 h-[2px]">
+      <div className="mb-8 overflow-hidden rounded-full bg-muted/30 h-0.5">
         <div
-          className="h-full bg-gradient-to-r from-foreground/60 to-foreground transition-all duration-1000 ease-out"
+          className="h-full bg-linear-to-r from-foreground/60 to-foreground transition-all duration-1000 ease-out"
           style={{ width: `${progress}%` }}
         />
       </div>
