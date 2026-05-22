@@ -39,8 +39,8 @@ const team = [
     desc: "Ingénieure en Génie Industriel & Logistique. Spécialiste optimisation des processus & Supply Chain. Expérience terrain en gestion opérationnelle.",
   },
   {
-    name: "Sara B.",
-    role: "Head of Product",
+    name: "Omar Agtib",
+    role: "Co-founder & CTO",
     img: coFounderImg,
     desc: "Ingénieur Informatique et data scientist, spécialisé dans le développement d'applications web, la gestion de bases de données et l'intelligence artificielle.",
   },
