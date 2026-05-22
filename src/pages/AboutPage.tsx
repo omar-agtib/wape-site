@@ -4,12 +4,14 @@ import {
   Eye,
   Heart,
   Sparkles,
-  Mail,
   HardHat,
   Map,
   Compass,
 } from "lucide-react";
 import { Link } from "react-router-dom";
+
+import ceoImg from "@/assets/ceo.jpeg";
+import coFounderImg from "@/assets/co-founder.jpeg";
 
 const values = [
   {
@@ -30,10 +32,18 @@ const values = [
 ];
 
 const team = [
-  { name: "Yassine A.", role: "Founder & CEO", initials: "YA" },
-  { name: "Sara B.", role: "Head of Product", initials: "SB" },
-  { name: "Karim L.", role: "CTO", initials: "KL" },
-  { name: "Nora M.", role: "Customer Success", initials: "NM" },
+  {
+    name: "Kaoutar Elmoutaouakil",
+    role: "Founder & CEO",
+    img: ceoImg,
+    desc: "Ingénieure en Génie Industriel & Logistique. Spécialiste optimisation des processus & Supply Chain. Expérience terrain en gestion opérationnelle.",
+  },
+  {
+    name: "Sara B.",
+    role: "Head of Product",
+    img: coFounderImg,
+    desc: "Ingénieur Informatique et data scientist, spécialisé dans le développement d'applications web, la gestion de bases de données et l'intelligence artificielle.",
+  },
 ];
 
 const About = () => {
@@ -159,7 +169,7 @@ const About = () => {
       {/* Team */}
       <section className="section-padding bg-secondary/40">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center max-w-2xl mx-auto mb-14">
+          <div className="text-center max-w-2xl mx-auto mb-16">
             <div className="text-sm font-semibold text-accent uppercase tracking-wider mb-3">
               Our Team
             </div>
@@ -167,27 +177,28 @@ const About = () => {
               A team of builders and engineers
             </h2>
           </div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid sm:grid-cols-2 gap-8 max-w-3xl mx-auto">
             {team.map((m) => (
               <div
                 key={m.name}
-                className="group bg-card border border-border rounded-2xl p-6 text-center hover:shadow-elevated hover:-translate-y-1 transition-all"
+                className="group bg-card border border-border rounded-2xl p-8 text-center hover:shadow-elevated hover:-translate-y-1 transition-all"
               >
-                <div className="w-20 h-20 mx-auto rounded-full bg-accent-gradient flex items-center justify-center mb-4 shadow-orange">
-                  <span className="text-accent-foreground font-display font-bold text-xl">
-                    {m.initials}
-                  </span>
+                <div className="w-32 h-32 mx-auto rounded-full overflow-hidden mb-6 ring-4 ring-accent/20 shadow-orange">
+                  <img
+                    src={m.img}
+                    alt={m.name}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
                 </div>
-                <h3 className="font-display font-semibold text-foreground">
+                <h3 className="font-display font-semibold text-foreground text-lg">
                   {m.name}
                 </h3>
-                <p className="text-sm text-muted-foreground mb-3">{m.role}</p>
-                <a
-                  href="#"
-                  className="inline-flex items-center gap-1 text-sm text-accent hover:underline"
-                >
-                  <Mail size={14} /> LinkedIn
-                </a>
+                <p className="text-sm text-muted-foreground mt-1 mb-4">
+                  {m.role}
+                </p>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  {m.desc}
+                </p>
               </div>
             ))}
           </div>
