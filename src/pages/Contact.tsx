@@ -51,25 +51,23 @@ const Contact = () => {
               <Mail className="text-accent mb-3" size={22} />
               <div className="text-sm text-muted-foreground mb-1">Email</div>
               <a
-                href="mailto:contact@wape.io"
+                href="mailto:contact@wape.ma"
                 className="font-medium text-foreground hover:text-accent"
               >
-                contact@wape.io
+                contact@wape.ma
               </a>
             </div>
             <div className="bg-card border border-border rounded-2xl p-6 shadow-card">
               <Phone className="text-accent mb-3" size={22} />
               <div className="text-sm text-muted-foreground mb-1">Phone</div>
               <div className="font-medium text-foreground">
-                +33 1 23 45 67 89
+                +212 6 24 92 79 64
               </div>
             </div>
             <div className="bg-card border border-border rounded-2xl p-6 shadow-card">
               <MapPin className="text-accent mb-3" size={22} />
-              <div className="text-sm text-muted-foreground mb-1">Offices</div>
-              <div className="font-medium text-foreground">
-                Paris · Casablanca
-              </div>
+              <div className="text-sm text-muted-foreground mb-1">Office</div>
+              <div className="font-medium text-foreground">Agadir, Morocco</div>
             </div>
             <Link
               to="/book-a-demo"

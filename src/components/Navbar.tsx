@@ -87,7 +87,7 @@ const mainLinks = [
 ];
 
 const trailingLinks = [
-  { label: "Community", to: "/community", icon: Users },
+  // { label: "Community", to: "/community", icon: Users },
   { label: "Contact", to: "/contact", icon: Mail },
 ];
 

@@ -24,16 +24,16 @@ const Footer = () => {
             </p>
             <div className="space-y-2 text-sm">
               <a
-                href="mailto:contact@wape.io"
+                href="mailto:contact@wape.ma"
                 className="inline-flex items-center gap-2 hover:text-accent transition"
               >
-                <Mail size={16} /> contact@wape.io
+                <Mail size={16} /> contact@wape.ma
               </a>
               <div className="flex items-center gap-2">
-                <Phone size={16} /> +33 1 23 45 67 89
+                <Phone size={16} /> +212 6 24 92 79 64
               </div>
               <div className="flex items-center gap-2">
-                <MapPin size={16} /> Paris · Casablanca
+                <MapPin size={16} /> Agadir, Morocco
               </div>
             </div>
           </div>
@@ -48,11 +48,11 @@ const Footer = () => {
                   About Us
                 </Link>
               </li>
-              <li>
+              {/* <li>
                 <Link to="/community" className="hover:text-accent transition">
                   Community
                 </Link>
-              </li>
+              </li> */}
               <li>
                 <Link to="/contact" className="hover:text-accent transition">
                   Contact
