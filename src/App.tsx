@@ -10,7 +10,7 @@ import Industries from "./pages/Industries";
 import IndustryDetail from "./pages/IndustryDetail";
 import Solutions from "./pages/Solutions";
 import SolutionDetail from "./pages/SolutionDetail";
-// import Community from "./pages/Community";
+import Community from "./pages/Community";
 import Contact from "./pages/Contact";
 import BookDemo from "./pages/BookDemo";
 import NotFound from "./pages/NotFound";
@@ -31,7 +31,7 @@ const App = () => (
             <Route path="/industries/:slug" element={<IndustryDetail />} />
             <Route path="/solutions" element={<Solutions />} />
             <Route path="/solutions/:slug" element={<SolutionDetail />} />
-            {/* <Route path="/community" element={<Community />} /> */}
+            <Route path="/community" element={<Community />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/book-a-demo" element={<BookDemo />} />
           </Route>
