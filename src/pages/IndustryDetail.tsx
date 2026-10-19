@@ -9,13 +9,14 @@ import {
   Lock,
   Bell,
 } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 
 type Status = "active" | "soon";
 
 const data: Record<
   string,
   {
-    icon: any;
+    icon: LucideIcon;
     title: string;
     tagline: string;
     status: Status;
