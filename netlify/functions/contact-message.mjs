@@ -3,6 +3,7 @@ const allowedHostnames = [
   "www.wape.ma",
   "localhost",
   "deploy-preview-1--comforting-conkies-87e555.netlify.app",
+  "deploy-preview-2--comforting-conkies-87e555.netlify.app",
 ];
 
 const htmlEscape = (value) =>
