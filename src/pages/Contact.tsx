@@ -61,7 +61,7 @@ const Contact = () => {
               <Phone className="text-accent mb-3" size={22} />
               <div className="text-sm text-muted-foreground mb-1">Phone</div>
               <div className="font-medium text-foreground">
-                +212 6 24 92 79 64
+                +212 7 85 65 25 81
               </div>
             </div>
             <div className="bg-card border border-border rounded-2xl p-6 shadow-card">
