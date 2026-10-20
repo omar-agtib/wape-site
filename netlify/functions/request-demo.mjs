@@ -81,7 +81,12 @@ export default async function handler(request) {
     }
 
     // Restrict successful verifications to our configured hostnames.
-    const allowedHostnames = ["wape.ma", "www.wape.ma", "localhost"];
+    const allowedHostnames = [
+      "wape.ma",
+      "www.wape.ma",
+      "localhost",
+      "deploy-preview-1--comforting-conkies-87e555.netlify.app",
+    ];
 
     if (!allowedHostnames.includes(verification.hostname)) {
       console.error("Unexpected Turnstile hostname");
