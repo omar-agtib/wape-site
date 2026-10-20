@@ -8,12 +8,13 @@ import {
   Package,
   CheckCircle2,
 } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 import dashboardMockup from "@/assets/dashboard-mockup.png";
 
 const data: Record<
   string,
   {
-    icon: any;
+    icon: LucideIcon;
     title: string;
     tagline: string;
     features: string[];

@@ -30,7 +30,7 @@ const Footer = () => {
                 <Mail size={16} /> contact@wape.ma
               </a>
               <div className="flex items-center gap-2">
-                <Phone size={16} /> +212 6 24 92 79 64
+                <Phone size={16} /> +212 7 85 65 25 81
               </div>
               <div className="flex items-center gap-2">
                 <MapPin size={16} /> Agadir, Morocco
