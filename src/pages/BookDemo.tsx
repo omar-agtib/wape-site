@@ -1,4 +1,5 @@
-import { useState, type FormEvent } from "react";
+import { useRef, useState, type FormEvent } from "react";
+import { Turnstile } from "@marsidev/react-turnstile";
 import { z } from "zod";
 import { format } from "date-fns";
 import {
@@ -96,6 +97,19 @@ const BookDemo = () => {
 
   const [moroccoNow, setMoroccoNow] = useState(getMoroccoNow);
 
+  const [turnstileToken, setTurnstileToken] = useState("");
+  const [turnstileError, setTurnstileError] = useState("");
+
+  const turnstileSiteKey = import.meta.env.VITE_TURNSTILE_SITE_KEY;
+
+  const turnstileRef = useRef<React.ElementRef<typeof Turnstile>>(null);
+
+  const resetTurnstile = () => {
+    setTurnstileToken("");
+    setTurnstileError("");
+    turnstileRef.current?.reset();
+  };
+
   const updateField = <K extends keyof DemoForm>(
     field: K,
     value: DemoForm[K],
@@ -190,6 +204,12 @@ const BookDemo = () => {
       return;
     }
 
+    if (!turnstileToken) {
+      setTurnstileError("Please complete the security verification.");
+
+      return;
+    }
+
     setErrors({});
     setSubmitting(true);
 
@@ -199,7 +219,10 @@ const BookDemo = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(result.data),
+        body: JSON.stringify({
+          ...result.data,
+          turnstileToken,
+        }),
       });
 
       if (!response.ok) {
@@ -219,6 +242,7 @@ const BookDemo = () => {
         description: "Our team will contact you to confirm your appointment.",
       });
     } catch (error) {
+      resetTurnstile();
       toast({
         title: "Unable to send request",
         description:
@@ -672,6 +696,56 @@ const BookDemo = () => {
                         </p>
                       </div>
                     </div>
+                  </div>
+                </div>
+
+                {/* Security verification */}
+                <div className="space-y-3">
+                  <div className="rounded-xl border border-border bg-muted/20 p-4">
+                    <div className="mb-3 flex items-center gap-2">
+                      <ShieldCheck size={18} className="text-accent" />
+
+                      <span className="text-sm font-medium text-foreground">
+                        Security verification
+                      </span>
+                    </div>
+
+                    {turnstileSiteKey ? (
+                      <Turnstile
+                        ref={turnstileRef}
+                        siteKey={turnstileSiteKey}
+                        options={{
+                          theme: "light",
+                          size: "flexible",
+                        }}
+                        onSuccess={(token) => {
+                          setTurnstileToken(token);
+                          setTurnstileError("");
+                        }}
+                        onExpire={() => {
+                          setTurnstileToken("");
+                          setTurnstileError(
+                            "Security verification expired. Please verify again.",
+                          );
+                        }}
+                        onError={() => {
+                          setTurnstileToken("");
+                          setTurnstileError(
+                            "Security verification failed. Please try again.",
+                          );
+                        }}
+                      />
+                    ) : (
+                      <p className="text-sm text-destructive">
+                        Security verification is not configured.
+                      </p>
+                    )}
+
+                    {turnstileError && (
+                      <p className="mt-2 text-xs text-destructive">
+                        {turnstileError}
+                      </p>
+                    )}
                   </div>
                 </div>
 

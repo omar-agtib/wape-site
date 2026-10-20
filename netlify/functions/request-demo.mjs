@@ -21,6 +21,77 @@ export default async function handler(request) {
   try {
     const body = await request.json();
 
+    // Verify Cloudflare Turnstile before sending email.
+    const turnstileToken = body.turnstileToken;
+    const turnstileSecret = process.env.TURNSTILE_SECRET_KEY;
+
+    if (!turnstileSecret) {
+      console.error("TURNSTILE_SECRET_KEY is missing");
+
+      return Response.json(
+        { error: "Security verification is unavailable." },
+        { status: 503 },
+      );
+    }
+
+    if (
+      typeof turnstileToken !== "string" ||
+      !turnstileToken ||
+      turnstileToken.length > 2048
+    ) {
+      return Response.json(
+        { error: "Security verification is required." },
+        { status: 403 },
+      );
+    }
+
+    const verificationResponse = await fetch(
+      "https://challenges.cloudflare.com/turnstile/v0/siteverify",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          secret: turnstileSecret,
+          response: turnstileToken,
+        }),
+      },
+    );
+
+    if (!verificationResponse.ok) {
+      console.error(
+        "Turnstile verification service failed",
+        verificationResponse.status,
+      );
+
+      return Response.json(
+        { error: "Security verification is temporarily unavailable." },
+        { status: 502 },
+      );
+    }
+
+    const verification = await verificationResponse.json();
+
+    if (!verification.success) {
+      return Response.json(
+        { error: "Security verification failed. Please try again." },
+        { status: 403 },
+      );
+    }
+
+    // Restrict successful verifications to our configured hostnames.
+    const allowedHostnames = ["wape.ma", "www.wape.ma", "localhost"];
+
+    if (!allowedHostnames.includes(verification.hostname)) {
+      console.error("Unexpected Turnstile hostname");
+
+      return Response.json(
+        { error: "Security verification failed." },
+        { status: 403 },
+      );
+    }
+
     const { name, company, email, phone, industry, needs, date, time } = body;
 
     if (
@@ -162,4 +233,10 @@ export default async function handler(request) {
 
 export const config = {
   path: "/api/request-demo",
+  rateLimit: {
+    action: "rate_limit",
+    windowLimit: 5,
+    windowSize: 60,
+    aggregateBy: ["ip"],
+  },
 };
