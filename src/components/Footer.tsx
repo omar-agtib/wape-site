@@ -7,16 +7,18 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto">
         <div className="grid md:grid-cols-5 gap-10 mb-12">
           <div className="md:col-span-2">
-            <div className="flex items-center gap-2 mb-4">
-              <div className="w-9 h-9 rounded-lg bg-accent-gradient flex items-center justify-center">
-                <span className="text-accent-foreground font-display font-bold text-sm">
-                  W
-                </span>
-              </div>
-              <span className="font-display font-bold text-xl text-primary-foreground">
-                WAPE
-              </span>
-            </div>
+            <Link
+              to="/"
+              className="mb-4 inline-flex items-center"
+              aria-label="WAPE - Home"
+            >
+              <img
+                src="/images/wape-logo.png"
+                alt="WAPE"
+                className="h-20 w-auto max-w-[280px] object-contain"
+                loading="lazy"
+              />
+            </Link>
             <p className="text-primary-foreground/50 max-w-sm leading-relaxed mb-6">
               Work Accurately, Proactively and Efficiently. The integrated
               digital platform transforming construction and asset-intensive
