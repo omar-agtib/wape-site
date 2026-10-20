@@ -125,19 +125,17 @@ const Navbar = () => {
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-8 flex items-center justify-between h-16 lg:h-20">
-        <Link to="/" onClick={closeMenu} className="flex items-center gap-2">
-          <div className="w-9 h-9 rounded-lg bg-accent-gradient flex items-center justify-center">
-            <span className="text-accent-foreground font-display font-bold text-sm">
-              W
-            </span>
-          </div>
-          <span
-            className={`font-display font-bold text-xl transition-colors duration-300 ${
-              transparent ? "text-primary-foreground" : "text-foreground"
-            }`}
-          >
-            WAPE
-          </span>
+        <Link
+          to="/"
+          onClick={closeMenu}
+          className="flex shrink-0 items-center"
+          aria-label="WAPE - Home"
+        >
+          <img
+            src="/images/wape-logo.png"
+            alt="WAPE"
+            className="h-14 w-auto max-w-[210px] object-contain lg:h-16 lg:max-w-[250px]"
+          />
         </Link>
 
         {/* Desktop links */}
